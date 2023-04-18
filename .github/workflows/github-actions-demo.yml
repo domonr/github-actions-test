@@ -24,7 +24,7 @@
          run: echo "CURRENT_DATETIME=$(date +'%Y年%m月%d日 %H:%M頃')" >> $GITHUB_ENV
        - name: Create Body
          run: |
-           echo '# ストアリリース日時' >> temp
+           echo '# ストアリリース日時' > temp
            echo '' >> temp
            echo '${{ env.CURRENT_DATETIME }}' >> temp
            echo "BODY=$(cat temp)" >> $GITHUB_ENV
