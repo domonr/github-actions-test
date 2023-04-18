@@ -18,6 +18,16 @@
            echo "TAG_NAME=$(cat TAG_NAME)" >> $GITHUB_ENV
            git tag $(cat TAG_NAME)
            git push -f origin $(cat TAG_NAME)
+       - name: Set current datetime as env variable
+         env:
+           TZ: 'Asia/Tokyo' # タイムゾーン指定
+         run: echo "CURRENT_DATETIME=$(date +'%Y月%m日%d日 %H:%M頃')" >> $GITHUB_ENV
+       - name: Create Body
+         run: |
+           echo '# ストアリリース日時' > temp
+           echo '' > temp
+           echo '${{ env.CURRENT_DATETIME }}' >> temp
+           echo "BODY=$(cat temp)" >> $GITHUB_ENV
        - name: Create Release Note
          id: create_release_note
          uses: ncipollo/release-action@v1
@@ -26,7 +36,7 @@
          with: 
            tag: ${{ env.TAG_NAME }}
            name: ${{ env.TAG_NAME }}
-           body: $(date +'%Y年%m月%d日 %H時%M分')
+           body: ${{ env.BODY }}
            generateReleaseNotes: true
            makeLatest: "latest"
 
