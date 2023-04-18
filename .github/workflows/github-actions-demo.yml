@@ -28,8 +28,8 @@
            echo "# ストアリリース日時<<$EOF" >> temp
            echo "" >> temp
            echo "${{ env.CURRENT_DATETIME }}" >> temp
+           echo "$EOF" >> temp
            echo "BODY=$(cat temp)" >> $GITHUB_ENV
-           echo "$EOF" >> $GITHUB_ENV
        - name: Create Release Note
          id: create_release_note
          uses: ncipollo/release-action@v1
