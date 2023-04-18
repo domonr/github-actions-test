@@ -27,7 +27,7 @@
            echo '# ストアリリース日時' >> temp
            echo '' >> temp
            echo '${{ env.CURRENT_DATETIME }}' >> temp
-           echo 'BODY=$(cat temp)' >> $GITHUB_ENV
+           echo "BODY=$(cat temp)" >> $GITHUB_ENV
        - name: Create Release Note
          id: create_release_note
          uses: ncipollo/release-action@v1
