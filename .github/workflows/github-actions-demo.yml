@@ -24,6 +24,7 @@
          run: echo "CURRENT_DATETIME=$(date +'%Y年%m月%d日 %H:%M頃')" >> $GITHUB_ENV
        - name: Create Body
          run: |
+           EOF=$(dd if=/dev/urandom bs=15 count=1 status=none | base64)
            echo "# ストアリリース日時<<$EOF" >> temp
            echo "" >> temp
            echo "${{ env.CURRENT_DATETIME }}" >> temp
