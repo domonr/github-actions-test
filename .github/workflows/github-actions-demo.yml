@@ -22,21 +22,16 @@
          env:
            TZ: "Asia/Tokyo" # タイムゾーン指定
          run: echo "CURRENT_DATETIME=$(date +'%Y年%m月%d日 %H:%M頃')" >> $GITHUB_ENV
-       - name: Create Body
-         run: |
-           EOF=$(dd if=/dev/urandom bs=15 count=1 status=none | base64)
-           echo "# ストアリリース日時<<$EOF" > temp
-           echo "" >> temp
-           echo "${{ env.CURRENT_DATETIME }}" >> temp
-           echo "$EOF" >> temp
-           echo "BODY=$(cat temp)" >> $GITHUB_ENV
        - name: Create Release Note
          id: create_release_note
          uses: ncipollo/release-action@v1
          with: 
            tag: ${{ env.TAG_NAME }}
            name: ${{ env.TAG_NAME }}
-           body: ${{ env.BODY }}
+           body: |
+             # ストアリリース日時
+             
+             ${{ env.CURRENT_DATETIME }}
+             
            generateReleaseNotes: true
            makeLatest: "latest"
-
