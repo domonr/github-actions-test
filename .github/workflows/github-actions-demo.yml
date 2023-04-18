@@ -11,8 +11,20 @@
      steps:
        - uses: actions/checkout@v3
        - name: Create Release Tag
+         id: create_release_tag
          run: |
            echo 1.28.2 > TAG_NUM
            echo v$(cat TAG_NUM) > TAG_NAME
            git tag $(cat TAG_NAME)
            git push -f origin $(cat TAG_NAME)
+       - name: Create Release Note
+         id: create_release_note
+         uses: ncipollo/release-action@v1
+         env:
+           TZ: 'Asia/Tokyo' # タイムゾーン指定
+         with: 
+           tag: ${{ steps.create_release_tag.outputs.TAG_NAME }}
+           name: ${{ steps.create_release_tag.outputs.TAG_NAME }}
+           body: $(date +'%Y年%m月%d日 %H時%M分')
+           generateReleaseNotes: true
+
