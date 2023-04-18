@@ -10,7 +10,6 @@
      runs-on: ubuntu-latest
      steps:
        - uses: actions/checkout@v3
-       - uses: yanamura/ios-bump-version@v1
        - run: |
            : # echo Lenet.xcodeproj/project.pbxproj | grep -m1 'MARKETING_VERSION' | cut -d'=' -f2 | tr -d ';' | tr -d ' ' > TAG_NUM 
            echo 1.28.2 > TAG_NUM
