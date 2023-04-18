@@ -10,7 +10,8 @@
      runs-on: ubuntu-latest
      steps:
        - uses: actions/checkout@v3
-       - run: |
+       - name: Create Release Tag
+         run: |
            echo 1.28.2 > TAG_NUM
            echo v$(cat TAG_NUM) > TAG_NAME
            git tag $(cat TAG_NAME)
