@@ -15,6 +15,7 @@
          run: |
            echo 1.28.2 > TAG_NUM
            echo v$(cat TAG_NUM) > TAG_NAME
+           echo '::set-output name=TAG_NAME::$(cat TAG_NAME)'
            git tag $(cat TAG_NAME)
            git push -f origin $(cat TAG_NAME)
        - name: Create Release Note
@@ -27,4 +28,5 @@
            name: ${{ steps.create_release_tag.outputs.TAG_NAME }}
            body: $(date +'%Y年%m月%d日 %H時%M分')
            generateReleaseNotes: true
+           makeLatest: "latest"
 
