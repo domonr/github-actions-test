@@ -11,7 +11,6 @@
      steps:
        - uses: actions/checkout@v3
        - run: |
-           : # echo Lenet.xcodeproj/project.pbxproj | grep -m1 'MARKETING_VERSION' | cut -d'=' -f2 | tr -d ';' | tr -d ' ' > TAG_NUM 
            echo 1.28.2 > TAG_NUM
            echo v$(cat TAG_NUM) > TAG_NAME
            git tag $(cat TAG_NAME)
