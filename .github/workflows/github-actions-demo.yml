@@ -21,10 +21,10 @@
        - name: Set current datetime as env variable
          env:
            TZ: 'Asia/Tokyo' # タイムゾーン指定
-         run: echo "CURRENT_DATETIME=$(date +'%Y月%m日%d日 %H:%M頃')" >> $GITHUB_ENV
+         run: echo "CURRENT_DATETIME=$(date +'%Y%m%d %H:%M')" >> $GITHUB_ENV
        - name: Create Body
          run: |
-           echo '# ストアリリース日時' > temp
+           echo '# ストアリリース日時' >> temp
            echo '' > temp
            echo ${{ env.CURRENT_DATETIME }} >> temp
            echo "BODY=$(cat temp)" >> $GITHUB_ENV
